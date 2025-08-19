@@ -17,6 +17,14 @@ type GoAllocator struct {
 	adapter ll.SliceAdapter[[]byte]
 }
 
+func NewGoAllocator() GoAllocator {
+	a := GoAllocator{
+		slices: make([][]byte, 0),
+	}
+	a.adapter = ll.New(&a.slices)
+	return a
+}
+
 func memSlicesSameAddr(slice ll.SliceLike[[]byte], idx int, val []byte) bool {
 	valAddr := uintptr(unsafe.Pointer(unsafe.SliceData(val)))
 	mem := ll.Get(slice, idx)
