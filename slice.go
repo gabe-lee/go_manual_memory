@@ -35,6 +35,12 @@ func CreateSlice[T any](sliceLen int, alloc Allocator) Slice[T] {
 	return sliceFromSlice(slice)
 }
 
+// Cretes a new `Slice[T]` with specified capacity (length 0), using provided `Allocator`
+func CreateEmptySlice[T any](sliceCap int, alloc Allocator) Slice[T] {
+	slice := Alloc[T](alloc, sliceCap)
+	return sliceFromSlice(slice[:0])
+}
+
 // Copies the data from this `Slice[T]` into a new `Slice[T]`
 // using the provided `Allocator`
 func (s Slice[T]) Clone(alloc Allocator) Slice[T] {
