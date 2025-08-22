@@ -1,4 +1,8 @@
 github.com/gabe-lee/go_effect_sort v1.3.1 h1:U1tiju2Aok29OX69nFBcr3YrxVytXlQcZqOH6Yxb9rQ=
 github.com/gabe-lee/go_effect_sort v1.3.1/go.mod h1:oxsTEfK6fGmPcxwnQkeYoy9sRuOHNd2iksRLjweYEfo=
+github.com/gabe-lee/go_effect_sort v1.3.2 h1:jJUJZw6XEIDAp2/n/TJnu/t8puLd2rUsLuTAje3z+Bg=
+github.com/gabe-lee/go_effect_sort v1.3.2/go.mod h1:8IddlbpA2SyuS2HE8V1seEdXThI9v/8FjZ1Kx9yzZZ4=
 github.com/gabe-lee/go_list_like v0.6.0 h1:tgQvbjTmcRqpoYVjvfinMmtg4z5OS2vUSU2jnne8lbA=
 github.com/gabe-lee/go_list_like v0.6.0/go.mod h1:lACAClhTJZzB2ecNdreFQXRaOI/eJaph+qHlfsUciis=
+github.com/gabe-lee/go_list_like v0.8.0 h1:e7OGQfEzn0zLqZ6GmOYFNQhWstmd3lE8APr+mSpW6UU=
+github.com/gabe-lee/go_list_like v0.8.0/go.mod h1:NpwyR8Pue1Et2+7b7NmArxVx3m/kOhe4bsKpb9ArGiY=

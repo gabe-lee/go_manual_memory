@@ -21,7 +21,7 @@ func NewGoAllocator() *GoAllocator {
 	a := GoAllocator{
 		slices: make([][]byte, 0),
 	}
-	a.adapter = ll.New(&a.slices)
+	a.adapter = ll.NewSliceAdapter(&a.slices)
 	return &a
 }
 
