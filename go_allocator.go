@@ -12,6 +12,8 @@ import (
 // and keeps a cached reference of each memory slice until it is freed, allowing
 // the user to store the returned memory in any format desired without fear of
 // loss to the garbage collector
+//
+// This is usually used as the 'Parent' allocator for the other allocators in this package
 type GoAllocator struct {
 	slices  [][]byte
 	adapter ll.SliceAdapter[[]byte]

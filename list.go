@@ -29,7 +29,7 @@ func CreateList[T any](listLen int, alloc Allocator) List[T] {
 // Convert this `List[T]` into a `Slice[T]`, handing off ownership
 // of the data to the new slice
 func (l *List[T]) ToSlice() Slice[T] {
-	s := l.toSliceNoDel()
+	s := l.AsSlice()
 	l.ptr = nil
 	l.len = 0
 	l.cap = 0
@@ -37,7 +37,11 @@ func (l *List[T]) ToSlice() Slice[T] {
 	return s
 }
 
-func (l *List[T]) toSliceNoDel() Slice[T] {
+// Convert this `List[T]` into a `Slice[T]`, WITHOUT handing off ownership
+// of the data to the new slice
+//
+// If the new slice is freed, this list becomes invalid
+func (l *List[T]) AsSlice() Slice[T] {
 	return Slice[T]{
 		ptr: l.ptr,
 		len: l.len,
@@ -48,7 +52,7 @@ func (l *List[T]) toSliceNoDel() Slice[T] {
 // Copies the data from this `List[T]` into a new `List[T]`
 // using the cached `Allocator`
 func (l *List[T]) Clone() List[T] {
-	slice := l.toSliceNoDel()
+	slice := l.AsSlice()
 	newSlice := slice.Clone(l.alloc)
 	return newSlice.ToList(l.alloc)
 }
@@ -108,7 +112,7 @@ var _ ll.ListLike[byte] = (*List[byte])(nil)
 //
 // Analogous to `slice[start:end]`
 func (l List[T]) SubSlice(start, end int) SubSlice[T] {
-	slice := l.toSliceNoDel()
+	slice := l.AsSlice()
 	return slice.SubSlice(start, end)
 }
 
@@ -120,7 +124,7 @@ func (l List[T]) SubSlice(start, end int) SubSlice[T] {
 //
 // Analogous to `slice[:]`
 func (l List[T]) WholeSlice() SubSlice[T] {
-	slice := l.toSliceNoDel()
+	slice := l.AsSlice()
 	return slice.WholeSlice()
 }
 
@@ -132,7 +136,7 @@ func (l List[T]) WholeSlice() SubSlice[T] {
 //
 // Analogous to `slice[start:]`
 func (l List[T]) EndSlice(start int) SubSlice[T] {
-	slice := l.toSliceNoDel()
+	slice := l.AsSlice()
 	return slice.EndSlice(start)
 }
 
@@ -144,7 +148,7 @@ func (l List[T]) EndSlice(start int) SubSlice[T] {
 //
 // Analogous to `slice[:end]`
 func (l List[T]) StartSlice(end int) SubSlice[T] {
-	slice := l.toSliceNoDel()
+	slice := l.AsSlice()
 	return slice.StartSlice(end)
 }
 
@@ -154,6 +158,6 @@ func (l List[T]) StartSlice(end int) SubSlice[T] {
 // will be reflected in the original list and any other overlapping sub-slices or Golang
 // slices (`[]T`)
 func (l List[T]) GoSlice() []T {
-	slice := l.toSliceNoDel()
+	slice := l.AsSlice()
 	return slice.GoSlice()
 }

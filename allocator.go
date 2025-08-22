@@ -2,6 +2,10 @@ package go_manual_memory
 
 import "unsafe"
 
+type Address interface {
+	~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr
+}
+
 const PAGE_SIZE = 8192
 
 type Allocator interface {

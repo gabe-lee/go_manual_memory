@@ -67,6 +67,20 @@ func (s *Slice[T]) ToList(alloc Allocator) List[T] {
 	return l
 }
 
+// Convert this `Slice[T]` into a `List[T]`, WITHOUT handing off ownership
+// of the data to the new list
+//
+// If the new list is freed, this slice becomes invalid
+func (s *Slice[T]) AsList(alloc Allocator) List[T] {
+	l := List[T]{
+		ptr:   s.ptr,
+		len:   s.len,
+		cap:   s.cap,
+		alloc: alloc,
+	}
+	return l
+}
+
 // Destroy this `Slice[T]`, returning the memory to the provided `Allocator`
 //
 // The caller MUST ensure the provided `Allocator` is the exact one originally used to
